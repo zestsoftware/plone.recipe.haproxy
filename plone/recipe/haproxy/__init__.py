@@ -100,15 +100,16 @@ class Recipe(object):
         # Add script wrappers
         bintarget=self.buildout["buildout"]["bin-directory"]
 
-        for dir in ["bin", "sbin"]:
-            if not os.path.isdir(dir):
+        for directory in ["bin", "sbin"]:
+            fullpath = os.path.join(dest, directory)
+            if not os.path.isdir(fullpath):
                 continue
-            for file in os.listdir(dir):
-                logger.info("Adding script wrapper for %s" % file)
-                target=os.path.join(bintarget, file)
+            for filename in os.listdir(fullpath):
+                logger.info("Adding script wrapper for %s" % filename)
+                target=os.path.join(bintarget, filename)
                 f=open(target, "wt")
                 print >>f, "#!/bin/sh"
-                print >>f, 'exec %s "$@"' % os.path.join(dir, file)
+                print >>f, 'exec %s "$@"' % os.path.join(fullpath, filename)
                 f.close()
                 os.chmod(target, 0755)
                 self.options.created(target)
