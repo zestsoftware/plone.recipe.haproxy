@@ -48,15 +48,17 @@ class Recipe(object):
         dest = self.options['location']
         url = self.options['url']
         # TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
-        target = self.options.get('target','generic')
+        target = self.options.get('target',None)
         # USE_PCRE=1
-        pcre=self.options.get('pcre', 0)
+        pcre=self.options.get('pcre', None)
         # CPU=(i686|i586|ultrasparc|generic)
-        cpu = self.options.get('cpu', 'generic')
+        cpu = self.options.get('cpu', None)
         extra_options = self.options.get('extra_options', '')
         # get rid of any newlines that may be in the options so they
         # do not get passed through to the commandline
         extra_options = ' '.join(extra_options.split())
+
+        buildoptions = dict(PREFIX=dest, TARGET=target, USE_PCRE=pcre, CPU=cpu)
 
         fname = getFromCache(
             url, self.name, self.download_cache, self.install_from_cache)
@@ -87,9 +89,11 @@ class Recipe(object):
                     else:
                         raise ValueError("Couldn't find Makefile")
                 if OSX:
-                    system("make -f Makefile.osx PREFIX=%s USE_PCRE=%s %s" % (dest, pcre, extra_options))
+                    optionstring = ' '.join(['='.join(x) for x in buildoptions.items() if x[1] and x[0] not in ('CPU', 'TARGET')])
+                    system("make -f Makefile.osx %s %s" % (optionstring, extra_options))
                 else:
-                    system("make PREFIX=%s TARGET=%s CPU=%s USE_PCRE=%s %s" % (target, cpu, dest, pcre, extra_options))
+                    optionstring = ' '.join(['='.join(x) for x in buildoptions.items() if x[1]])
+                    system("make %s %s" % (optionstring, extra_options))
                 system("make PREFIX=%s install" % dest)
             finally:
                 os.chdir(here)
