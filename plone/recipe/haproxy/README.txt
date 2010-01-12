@@ -3,59 +3,49 @@ Supported options
 
 The recipe supports the following options:
 
-.. Note to recipe author!
-   ----------------------
-   For each option the recipe uses you shoud include a description
-   about the purpose of the option, the format and semantics of the
-   values it accepts, whether it is mandatory or optional and what the
-   default value is if it is omitted.
+The recipe supports the following options:
 
-option1
-    Description for ``option1``...
+url
+    URL pointing to the ``haproxy`` compressed archive.
+http://dist.plone.org/thirdparty/haproxy-1.3.22.zip by default.
 
-option2
-    Description for ``option2``...
+target
+    TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
+
+cpu
+    CPU=(i686|i586|ultrasparc|generic)
+
+pcre
+    USE_PCRE=(0|1)
 
 
 Example usage
 =============
-
-.. Note to recipe author!
-   ----------------------
-   zc.buildout provides a nice testing environment which makes it
-   relatively easy to write doctests that both demonstrate the use of
-   the recipe and test it.
-   You can find examples of recipe doctests from the PyPI, e.g.
-   
-     http://pypi.python.org/pypi/zc.recipe.egg
-
-   The PyPI page for zc.buildout contains documentation about the test
-   environment.
-
-     http://pypi.python.org/pypi/zc.buildout#testing-support
-
-   Below is a skeleton doctest that you can start with when building
-   your own tests.
 
 We'll start by creating a buildout that uses the recipe::
 
     >>> write('buildout.cfg',
     ... """
     ... [buildout]
-    ... parts = test1
+    ... parts = haproxy
     ...
-    ... [test1]
+    ... [haproxy]
     ... recipe = plone.recipe.haproxy
-    ... option1 = %(foo)s
-    ... option2 = %(bar)s
-    ... """ % { 'foo' : 'value1', 'bar' : 'value2'})
+    ... url = %(url)s
+    ... """ % { 'url' : 'http://dist.plone.org/thirdparty/yxorpah-1.3.22.zip'})
 
 Running the buildout gives us::
 
-    >>> print 'start', system(buildout) # doctest:+ELLIPSIS
-    start...
-    Installing test1.
-    Unused options for test1: 'option2' 'option1'.
+    >>> print system(buildout)
+    Installing haproxy.
+    haproxy: Downloading http://dist.plone.org/thirdparty/yxorpah-1.3.22.zip
+    While:
+      Installing haproxy.
     <BLANKLINE>
-
+    An internal error occured due to a bug in either zc.buildout or in a
+    recipe being used:
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+    <BLANKLINE>
 
