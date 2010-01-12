@@ -22,7 +22,7 @@ cpu
     CPU=(i686|i586|ultrasparc|generic)
 
 pcre
-    USE_PCRE=(0|1)
+    USE_PCRE=(1)
 
 
 Example usage
@@ -45,6 +45,7 @@ options listed above, e.g.::
     [haproxy]
     recipe = plone.recipe.haproxy
     target = linux26
+    pcre = 1
     cpu = i686
 
 Tests
