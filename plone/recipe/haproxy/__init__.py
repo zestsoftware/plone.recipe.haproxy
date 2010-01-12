@@ -10,6 +10,8 @@ import shutil
 import zc.buildout
 import commands
 
+default_url = 'http://dist.plone.org/thirdparty/haproxy-1.3.22.zip'
+
 def system(c):
     if os.system(c):
         raise SystemError("Failed", c)
@@ -48,9 +50,9 @@ class Recipe(object):
         """Installer"""
         logger = logging.getLogger(self.name)
         dest = self.options['location']
-        url = self.options['url']
+        url = self.options.get('target', default_url)
         # TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
-        target = self.options.get('target',None)
+        target = self.options.get('target', None)
         # USE_PCRE=1
         pcre=self.options.get('pcre', None)
         # CPU=(i686|i586|ultrasparc|generic)
