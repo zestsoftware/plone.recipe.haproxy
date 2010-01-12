@@ -12,7 +12,7 @@ This recipe supports the following options:
 
 url 
     URL pointing to the ``haproxy`` compressed archive. E.g. 
-    http://haproxy.1wt.eu/download/1.3/src/haproxy-1.3.22.tar.gz.
+    http://dist.plone.org/thirdparty/haproxy-1.3.22.zip
     **This option is required**.
 
 target
@@ -45,7 +45,7 @@ If you like or need to you can override these parameters, e.g.::
 
     [haproxy]
     recipe = plone.recipe.haproxy
-    url = http://dist.plone.org/thirdparty/haproxy-1.3.22.tar.gz
+    url = http://my.dist.server/haproxy-1.3.22.zip
     target = linux26
     cpu = i686
     pcre = 1
