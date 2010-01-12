@@ -14,7 +14,7 @@ def system(c):
     if os.system(c):
         raise SystemError("Failed", c)
 
-OSX = sys.platform.startswith('darwin')
+#OSX = sys.platform.startswith('darwin')
 
 class Recipe(object):
     """zc.buildout recipe"""
@@ -88,9 +88,9 @@ class Recipe(object):
                         os.chdir(entries[0])
                     else:
                         raise ValueError("Couldn't find Makefile")
-                if OSX:
-                    optionstring = ' '.join(['='.join(x) for x in buildoptions.items() if x[1] and x[0] not in ('CPU', 'TARGET')])
-                    system("make -f Makefile.osx %s %s" % (optionstring, extra_options))
+#                if OSX:
+#                    optionstring = ' '.join(['='.join(x) for x in buildoptions.items() if x[1] and x[0] not in ('CPU', 'TARGET')])
+#                    system("make -f Makefile.osx %s %s" % (optionstring, extra_options))
                 else:
                     optionstring = ' '.join(['='.join(x) for x in buildoptions.items() if x[1]])
                     system("make %s %s" % (optionstring, extra_options))
