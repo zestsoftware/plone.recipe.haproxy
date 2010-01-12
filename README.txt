@@ -1,6 +1,81 @@
+
 .. contents::
 
 - Code repository: http://svn.plone.org/svn/collective/buildout/plone.recipe.haproxy
-- Questions and comments to somemailing_list
-- Report bugs at http://bug.somewhere.com/..
+- Questions and comments to aclark@aclark.net.
+- Report bugs aclark@aclark.net.
+
+Supported options
+=================
+
+The recipe supports the following options:
+
+url
+    URL pointing to the ``haproxy`` compressed archive. http://dist.plone.org/thirdparty/haproxy-1.3.22.zip by default.
+    (We re-package haproxy-1.3.22.tar.gz as haproxy-1.3.22.zip to avoid a common problem unarchiving tar/gzip files 
+    with Python).
+
+target
+    TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
+
+cpu
+    CPU=(i686|i586|ultrasparc|generic)
+
+pcre
+    USE_PCRE=(0|1)
+
+
+Example usage
+=============
+
+By default, this recipe should work with no options specified, e.g.::
+
+    [buildout]
+    parts +=
+        ...
+        haproxy
+
+    [haproxy]
+    recipe = plone.recipe.haproxy
+
+Doing nothing else will configure a generic ``target`` and ``cpu``.
+If you like or need to, you should be able to set any of the supported
+options listed above, e.g.::
+
+    [haproxy]
+    recipe = plone.recipe.haproxy
+    target = linux26
+    cpu = i686
+
+Tests
+=====
+
+We'll start by creating a buildout that uses the recipe::
+
+    >>> write('buildout.cfg',
+    ... """
+    ... [buildout]
+    ... parts = haproxy
+    ...
+    ... [haproxy]
+    ... recipe = plone.recipe.haproxy
+    ... url = %(url)s
+    ... """ % { 'url' : 'http://dist.plone.org/thirdparty/yxorpah-1.3.22.zip'})
+
+Running the buildout with a known bad URL gives us::
+
+    >>> print system(buildout)
+    Installing haproxy.
+    haproxy: Downloading http://dist.plone.org/thirdparty/yxorpah-1.3.22.zip
+    While:
+      Installing haproxy.
+    <BLANKLINE>
+    An internal error occured due to a bug in either zc.buildout or in a
+    recipe being used:
+    Traceback (most recent call last):
+    ...
+    HTTPError: HTTP Error 404: Not Found
+    <BLANKLINE>
+
+XXX If you are reading this, please consider adding more tests ;-) 
 

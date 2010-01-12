@@ -1,2 +1,5 @@
-Helge Tesdal, Author
+Contributors
+============
 
+- Helge Tesdal, Author [tesdal]
+- Alex Clark, Support and maintenance [aclark]

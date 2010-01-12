@@ -13,23 +13,10 @@ version = '1.0'
 long_description = (
     read('README.txt')
     + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
-    read('plone', 'recipe', 'haproxy', 'README.txt')
-    + '\n' +
-    'Contributors\n' 
-    '************\n'
-    + '\n' +
     read('CONTRIBUTORS.txt')
     + '\n' +
-    'Change history\n'
-    '**************\n'
-    + '\n' + 
     read('CHANGES.txt')
-    + '\n' +
-   'Download\n'
-    '********\n'
+    + '\n'
     )
 entry_point = 'plone.recipe.haproxy:Recipe'
 entry_points = {"zc.buildout": ["default = %s" % entry_point]}
