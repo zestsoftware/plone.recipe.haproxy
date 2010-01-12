@@ -11,9 +11,9 @@ Supported options
 The recipe supports the following options:
 
 url
-    URL pointing to the ``haproxy`` compressed archive. http://dist.plone.org/thirdparty/haproxy-1.3.22.zip by default.
-    (We re-package haproxy-1.3.22.tar.gz as haproxy-1.3.22.zip to avoid a common problem unarchiving tar/gzip files 
-    with Python).
+    URL pointing to the ``haproxy`` compressed archive. http://dist.plone.org/thirdparty/haproxy-1.3.22.zip 
+    by default. (We are re-packaging haproxy-1.3.22.tar.gz as haproxy-1.3.22.zip to avoid
+    unarchiving tar/gzip files with Python).
 
 target
     TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
@@ -38,15 +38,15 @@ By default, this recipe should work with no options specified, e.g.::
     [haproxy]
     recipe = plone.recipe.haproxy
 
-Doing nothing else will configure a generic ``target`` and ``cpu``.
-If you like or need to, you should be able to set any of the supported
-options listed above, e.g.::
+This will configure no options for ``target``, ``pcre``, and ``cpu``.
+If you like or need to, you should be able to set any of these parameters,
+e.g.::
 
     [haproxy]
     recipe = plone.recipe.haproxy
     target = linux26
-    pcre = 1
     cpu = i686
+    pcre = 1
 
 Tests
 =====

@@ -1,13 +1,13 @@
 Releases
 =========
 
-
 1.0b2 (2010-01-11)
-----------------
+------------------
 
 - Clean up documentation, organize package contents. [aclark]
-- Remove OS X hacks to allow ``generic`` target to be used on OS X
-  (Snow Leopard fix). [aclark]
+- Don't force ``make -f Makefile.osx`` on OS X, fixes compilation on Snow
+  Leopard. [aclark]
+
 
 1.0b1 (2008-11-25)
 ------------------
