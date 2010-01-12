@@ -5,8 +5,8 @@ Releases
 ------------------
 
 - Clean up documentation, reorganize package contents. [aclark]
-- Don't force ``make -f Makefile.osx`` on OS X, fixes compilation on Snow
-  Leopard. [aclark]
+- Don't force ``make -f Makefile.osx`` on OS X, fixes Snow Leopard
+  compilation. [aclark]
 
 
 1.0b1 (2008-11-25)

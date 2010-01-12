@@ -29,7 +29,7 @@ pcre
 Example usage
 =============
 
-By default, this recipe will work with only the ``url`` option specified, e.g.::
+By default this recipe will work with only the ``url`` option specified, e.g.::
 
     [buildout]
     parts +=
@@ -40,9 +40,8 @@ By default, this recipe will work with only the ``url`` option specified, e.g.::
     recipe = plone.recipe.haproxy
     url = http://haproxy.1wt.eu/download/1.3/src/haproxy-1.3.22.tar.gz
 
-This will configure the default options for ``url``, ``target``, ``pcre``, and ``cpu``.
-If you like or need to, you can override any of these parameters,
-e.g.::
+This will configure the default options for ``target``, ``pcre``, and ``cpu``.
+If you like or need to you can override these parameters, e.g.::
 
     [haproxy]
     recipe = plone.recipe.haproxy
