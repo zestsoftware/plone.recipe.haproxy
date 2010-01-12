@@ -48,7 +48,7 @@ class Recipe(object):
         """Installer"""
         logger = logging.getLogger(self.name)
         dest = self.options['location']
-        dest = self.options['url']
+        url = self.options['url']
         # TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
         target = self.options.get('target', None)
         # USE_PCRE=1
