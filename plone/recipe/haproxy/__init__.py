@@ -14,6 +14,8 @@ def system(c):
     if os.system(c):
         raise SystemError("Failed", c)
 
+# XXX Can I whack this? Seems evil, in that it's preventing me from doing 'target = generic'
+# (in order to get haproxy to compile on Snow Leopard) by always forcing Makefile.osx.
 #OSX = sys.platform.startswith('darwin')
 
 class Recipe(object):
@@ -88,9 +90,12 @@ class Recipe(object):
                         os.chdir(entries[0])
                     else:
                         raise ValueError("Couldn't find Makefile")
+
+#               XXX Potential evil? See my comment above.
 #                if OSX:
 #                    optionstring = ' '.join(['='.join(x) for x in buildoptions.items() if x[1] and x[0] not in ('CPU', 'TARGET')])
 #                    system("make -f Makefile.osx %s %s" % (optionstring, extra_options))
+
                 else:
                     optionstring = ' '.join(['='.join(x) for x in buildoptions.items() if x[1]])
                     system("make %s %s" % (optionstring, extra_options))
