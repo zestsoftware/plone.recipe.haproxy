@@ -10,24 +10,26 @@ Supported options
 
 This recipe supports the following options:
 
-url
-    URL pointing to the ``haproxy`` compressed archive. http://dist.plone.org/thirdparty/haproxy-1.3.22.tar.gz
-    by default.
+url 
+    URL pointing to the ``haproxy`` compressed archive. E.g. 
+    http://haproxy.1wt.eu/download/1.3/src/haproxy-1.3.22.tar.gz.
+    **This option is required**.
 
 target
-    TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
+    Target can be one of the following: 
+    linux22, linux24, linux24e linux24eold, linux26, solaris, freebsd, openbsd, generic.
 
 cpu
-    CPU=(i686|i586|ultrasparc|generic)
+    CPU can be one of the following: i686, i586, ultrasparc, generic.
 
 pcre
-    USE_PCRE=(1)
+    Set to ``1`` to enable the use of the PCRE library.
 
 
 Example usage
 =============
 
-By default, this recipe should work with no options specified, e.g.::
+By default, this recipe will work with only the ``url`` option specified, e.g.::
 
     [buildout]
     parts +=
@@ -36,6 +38,7 @@ By default, this recipe should work with no options specified, e.g.::
 
     [haproxy]
     recipe = plone.recipe.haproxy
+    url = http://haproxy.1wt.eu/download/1.3/src/haproxy-1.3.22.tar.gz
 
 This will configure the default options for ``url``, ``target``, ``pcre``, and ``cpu``.
 If you like or need to, you can override any of these parameters,
@@ -43,7 +46,7 @@ e.g.::
 
     [haproxy]
     recipe = plone.recipe.haproxy
-    url = http://haproxy.1wt.eu/download/1.3/src/haproxy-1.3.22.tar.gz
+    url = http://dist.plone.org/thirdparty/haproxy-1.3.22.tar.gz
     target = linux26
     cpu = i686
     pcre = 1
