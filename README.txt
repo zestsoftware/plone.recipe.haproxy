@@ -1,10 +1,6 @@
 
 .. contents::
 
-- Code repository: http://svn.plone.org/svn/collective/buildout/plone.recipe.haproxy
-- Questions and comments to aclark@aclark.net.
-- Report bugs aclark@aclark.net.
-
 Supported options
 =================
 
@@ -50,35 +46,15 @@ If you like or need to you can override these parameters, e.g.::
     cpu = i686
     pcre = 1
 
-Tests
-=====
 
-We'll start by creating a buildout that uses the recipe::
+Reporting bugs or asking questions
+==================================
 
-    >>> write('buildout.cfg',
-    ... """
-    ... [buildout]
-    ... parts = haproxy
-    ...
-    ... [haproxy]
-    ... recipe = plone.recipe.haproxy
-    ... url = %(url)s
-    ... """ % { 'url' : 'http://dist.plone.org/thirdparty/yxorpah-1.3.22.zip'})
+We have a shared bugtracker and help desk on Launchpad:
+https://bugs.launchpad.net/collective.buildout/
 
-Running the buildout with a known bad URL gives us::
 
-    >>> print system(buildout)
-    Installing haproxy.
-    haproxy: Downloading http://dist.plone.org/thirdparty/yxorpah-1.3.22.zip
-    While:
-      Installing haproxy.
-    <BLANKLINE>
-    An internal error occured due to a bug in either zc.buildout or in a
-    recipe being used:
-    Traceback (most recent call last):
-    ...
-    HTTPError: HTTP Error 404: Not Found
-    <BLANKLINE>
+Code repository
+===============
 
-XXX If you are reading this, please consider adding more tests ;-) 
-
+https://svn.plone.org/svn/collective/buildout/plone.recipe.haproxy

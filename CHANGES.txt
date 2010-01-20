@@ -1,16 +1,24 @@
 Releases
 =========
 
+1.0b3 (unreleased)
+------------------
+
+- Further package metadata cleanup. Moved tests outside of the package
+  description.
+  [hannosch]
+
 1.0b2 (2010-01-12)
 ------------------
 
-- Clean up documentation, reorganize package contents. [aclark]
-- Don't force ``make -f Makefile.osx`` on OS X, fixes Snow Leopard
-  compilation. [aclark]
+- Clean up documentation, reorganize package contents.
+  [aclark]
 
+- Don't force ``make -f Makefile.osx`` on OS X, fixes Snow Leopard compilation.
+  [aclark]
 
 1.0b1 (2008-11-25)
 ------------------
 
-- First public release [Helge Tesdal].
-
+- First public release.
+  [tesdal]

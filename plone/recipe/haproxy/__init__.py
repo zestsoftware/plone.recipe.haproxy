@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 """Recipe haproxy"""
 
-import logging, os, shutil, tempfile, urllib2, urlparse
+import logging, os, tempfile, urllib2, urlparse
 import setuptools.archive_util
 import datetime
 import sha
-import sys
 import shutil
 import zc.buildout
-import commands
 
 def system(c):
     if os.system(c):
