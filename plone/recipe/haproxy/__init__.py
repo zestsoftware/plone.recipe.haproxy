@@ -42,7 +42,8 @@ class Recipe(object):
         """Installer"""
         logger = logging.getLogger(self.name)
         dest = self.options['location']
-        url = self.options['url']
+        url = self.options.get('url',
+            'http://dist.plone.org/thirdparty/haproxy-1.3.22.zip')
         # TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
         target = self.options.get('target', None)
         # USE_PCRE=1
