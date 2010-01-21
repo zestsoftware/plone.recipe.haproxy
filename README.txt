@@ -25,17 +25,18 @@ pcre
 Example usage
 =============
 
-By default this recipe will work with only the ``url`` option specified, e.g.::
+To use this recipe, just create a part for it and define the ``recipe``
+parameter::
 
     [buildout]
-    parts +=
+    parts =
         ...
         haproxy
 
     [haproxy]
     recipe = plone.recipe.haproxy
 
-This will configure the default options for ``target``, ``pcre``, and ``cpu``.
+This will configure the default options for ``url``, ``target``, ``pcre``, and ``cpu``.
 If you like or need to you can override these parameters, e.g.::
 
     [haproxy]
