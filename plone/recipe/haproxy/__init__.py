@@ -53,7 +53,7 @@ class Recipe(object):
         logger = logging.getLogger(self.name)
         dest = self.options['location']
         url = self.options.get('url',
-            'http://dist.plone.org/thirdparty/haproxy-1.3.22.zip')
+            'http://dist.plone.org/thirdparty/haproxy-1.4.4.zip')
         # TARGET=(linux24|linux26|solaris|freebsd|openbsd|generic)
         target = self.options.get('target', None)
         # USE_PCRE=1

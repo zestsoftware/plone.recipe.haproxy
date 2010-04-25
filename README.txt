@@ -8,7 +8,7 @@ This recipe supports the following options:
 
 url
     URL pointing to the ``haproxy`` compressed archive. By default it uses:
-    http://dist.plone.org/thirdparty/haproxy-1.3.22.zip
+    http://dist.plone.org/thirdparty/haproxy-1.4.4.zip
 
 target
     Target can be one of the following: 
@@ -36,12 +36,12 @@ parameter::
     [haproxy]
     recipe = plone.recipe.haproxy
 
-This will configure the default options for ``url``, ``target``, ``pcre``, and ``cpu``.
-If you like or need to you can override these parameters, e.g.::
+This will configure the default options for ``url``, ``target``, ``pcre``, and
+``cpu``. If you like or need to you can override these parameters, e.g.::
 
     [haproxy]
     recipe = plone.recipe.haproxy
-    url = http://my.dist.server/haproxy-1.3.22.zip
+    url = http://my.dist.server/haproxy-1.x.y.zip
     target = linux26
     cpu = i686
     pcre = 1
