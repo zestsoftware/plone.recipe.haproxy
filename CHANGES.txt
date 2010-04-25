@@ -4,6 +4,8 @@ Releases
 1.0b4 (unreleased)
 ------------------
 
+- Updated tests, removed test extras and dependency on zope.testing.
+  [hannosch]
 
 1.0b3 (2010-01-20)
 ------------------

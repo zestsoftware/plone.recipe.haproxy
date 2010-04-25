@@ -29,14 +29,6 @@ setup(
         'setuptools',
         'zc.buildout'
     ],
-    tests_require=[
-        'zope.testing',
-        'zc.buildout'
-    ],
-    extras_require=dict(
-        tests=['zope.testing', 'zc.buildout']
-    ),
-    test_suite = 'plone.recipe.haproxy.tests.test_docs.test_suite',
     entry_points={
         "zc.buildout": ["default = plone.recipe.haproxy:Recipe"]
     },
