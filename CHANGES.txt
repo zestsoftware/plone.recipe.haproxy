@@ -1,7 +1,7 @@
 Releases
 =========
 
-1.1 (unreleased)
+1.1 (2010-04-25)
 ----------------
 
 - Default to ``http://dist.plone.org/thirdparty/haproxy-1.4.4.zip``. Make sure
