@@ -4,6 +4,9 @@ Releases
 1.0b4 (unreleased)
 ------------------
 
+- PEP8 cleanup, avoid deprecation warning for the sha module under Python 2.6.
+  [hannosch]
+
 - Updated tests, removed test extras and dependency on zope.testing.
   [hannosch]
 

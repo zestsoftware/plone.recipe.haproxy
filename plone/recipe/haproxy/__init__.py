@@ -1,25 +1,35 @@
 # -*- coding: utf-8 -*-
-"""Recipe haproxy"""
 
-import logging, os, tempfile, urllib2, urlparse
-import setuptools.archive_util
 import datetime
-import sha
+import logging
+import os
 import shutil
+import tempfile
+import urllib2
+import urlparse
+
+try:
+    from hashlib import sha1
+except ImportError:
+    from sha import new as sha1
+
+import setuptools.archive_util
 import zc.buildout
+
 
 def system(c):
     if os.system(c):
         raise SystemError("Failed", c)
 
+
 class Recipe(object):
-    """zc.buildout recipe"""
 
     def __init__(self, buildout, name, options):
         self.buildout, self.name, self.options = buildout, name, options
         directory = buildout['buildout']['directory']
         self.download_cache = buildout['buildout'].get('download-cache')
-        self.install_from_cache = buildout['buildout'].get('install-from-cache')
+        self.install_from_cache = buildout['buildout'].get(
+            'install-from-cache')
 
         if self.download_cache:
             # cache keys are hashes of url, to ensure repeatability if the
@@ -44,10 +54,10 @@ class Recipe(object):
         dest = self.options['location']
         url = self.options.get('url',
             'http://dist.plone.org/thirdparty/haproxy-1.3.22.zip')
-        # TARGET=(linux22|linux24|linux24e|linux24eold|linux26|solaris|freebsd|openbsd|generic)
+        # TARGET=(linux24|linux26|solaris|freebsd|openbsd|generic)
         target = self.options.get('target', None)
         # USE_PCRE=1
-        pcre=self.options.get('pcre', None)
+        pcre = self.options.get('pcre', None)
         # CPU=(i686|i586|ultrasparc|generic)
         cpu = self.options.get('cpu', None)
         extra_options = self.options.get('extra_options', '')
@@ -81,13 +91,15 @@ class Recipe(object):
             try:
                 if not os.path.exists('Makefile'):
                     entries = os.listdir(tmp)
+                    # Ignore hidden files
+                    entries = [e for e in entries if not e.startswith('.')]
                     if len(entries) == 1:
                         os.chdir(entries[0])
                     else:
                         raise ValueError("Couldn't find Makefile")
-
                 else:
-                    optionstring = ' '.join(['='.join(x) for x in buildoptions.items() if x[1]])
+                    optionstring = ' '.join(
+                        ['='.join(x) for x in buildoptions.items() if x[1]])
                     system("make %s %s" % (optionstring, extra_options))
                 system("make PREFIX=%s install" % dest)
             finally:
@@ -115,14 +127,14 @@ class Recipe(object):
 
         return dest
 
-
     def update(self):
         """Updater"""
         pass
 
+
 def getFromCache(url, name, download_cache=None, install_from_cache=False):
     if download_cache:
-        cache_fname = sha.new(url).hexdigest()
+        cache_fname = sha1(url).hexdigest()
         cache_name = os.path.join(download_cache, cache_fname)
         if not os.path.isdir(download_cache):
             os.mkdir(download_cache)
@@ -163,7 +175,8 @@ def getFromCache(url, name, download_cache=None, install_from_cache=False):
                 fname = os.path.join(cache_name, filename)
                 if filename != "cache.ini":
                     now = datetime.datetime.utcnow()
-                    cache_ini = open(os.path.join(cache_name, "cache.ini"), "w")
+                    cache_ini = os.path.join(cache_name, "cache.ini")
+                    cache_ini = open(cache_ini, "w")
                     print >>cache_ini, "[cache]"
                     print >>cache_ini, "download_url =", url
                     print >>cache_ini, "retrieved =", now.isoformat() + "Z"
@@ -178,9 +191,9 @@ def getFromCache(url, name, download_cache=None, install_from_cache=False):
             open(fname, 'w').write(urllib2.urlopen(url).read())
         except:
             if tmp2 is not None:
-               shutil.rmtree(tmp2)
+                shutil.rmtree(tmp2)
             if download_cache:
-               shutil.rmtree(cache_name)
+                shutil.rmtree(cache_name)
             raise
 
     return fname

@@ -9,8 +9,7 @@ setup(
     long_description=(
         open('README.txt').read() + '\n' +
         open('CONTRIBUTORS.txt').read() + '\n' +
-        open('CHANGES.txt').read()
-    ),
+        open('CHANGES.txt').read()),
     classifiers=[
         'Framework :: Buildout',
         'Intended Audience :: Developers',
@@ -30,6 +29,6 @@ setup(
         'zc.buildout'
     ],
     entry_points={
-        "zc.buildout": ["default = plone.recipe.haproxy:Recipe"]
+        "zc.buildout": ["default = plone.recipe.haproxy:Recipe"],
     },
     )

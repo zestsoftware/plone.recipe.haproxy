@@ -6,7 +6,7 @@ import unittest
 import zc.buildout.tests
 import zc.buildout.testing
 
-optionflags =  (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
+optionflags = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
 
 def setUp(test):
