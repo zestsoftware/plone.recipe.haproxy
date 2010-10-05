@@ -3,6 +3,8 @@ Releases
 
 1.1.1 (unreleased)
 ------------------
+- Fix bug with install_from_cache that prevents downloading haproxy if not
+  already present in the cache [silviot]
 
 
 1.1 (2010-04-25)
