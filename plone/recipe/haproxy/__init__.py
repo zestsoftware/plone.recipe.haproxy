@@ -30,6 +30,8 @@ class Recipe(object):
         self.download_cache = buildout['buildout'].get('download-cache')
         self.install_from_cache = buildout['buildout'].get(
             'install-from-cache')
+        if isinstance(self.install_from_cache, (str, unicode)):
+            self.install_from_cache = self.install_from_cache.lower() == 'true'
 
         if self.download_cache:
             # cache keys are hashes of url, to ensure repeatability if the
