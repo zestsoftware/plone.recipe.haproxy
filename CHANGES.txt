@@ -1,7 +1,7 @@
 Releases
 =========
 
-1.1.1 (unreleased)
+1.1.1 (2010-10-06)
 ------------------
 
 - Update to haproxy 1.4.8.
