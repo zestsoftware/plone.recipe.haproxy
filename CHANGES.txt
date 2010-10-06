@@ -7,8 +7,8 @@ Releases
 - Update to haproxy 1.4.8.
   [hannosch]
 
-- Fix bug with install_from_cache that prevents downloading haproxy if not
-  already present in the cache.
+- Fix bug with ``install_from_cache`` that prevents downloading haproxy if it
+  is not already present in the cache.
   [silviot]
 
 1.1 (2010-04-25)
