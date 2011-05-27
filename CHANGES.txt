@@ -4,6 +4,7 @@ Releases
 1.1.2 (unreleased)
 ------------------
 
+- Force the use of gmake on freebsd. [lregebro]
 
 1.1.1 (2010-10-06)
 ------------------

@@ -91,6 +91,10 @@ class Recipe(object):
         try:
             os.chdir(tmp)
             try:
+                if target in ('freebsd',):
+                    make = 'gmake' # Force the use of gmake on freebsd.
+                else:
+                    make = 'make'
                 if not os.path.exists('Makefile'):
                     entries = os.listdir(tmp)
                     # Ignore hidden files
@@ -102,8 +106,8 @@ class Recipe(object):
                 else:
                     optionstring = ' '.join(
                         ['='.join(x) for x in buildoptions.items() if x[1]])
-                    system("make %s %s" % (optionstring, extra_options))
-                system("make PREFIX=%s install" % dest)
+                    system("%s %s %s" % (make, optionstring, extra_options))
+                system("%s PREFIX=%s install" % (make, dest))
             finally:
                 os.chdir(here)
         except:
