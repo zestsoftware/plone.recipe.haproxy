@@ -103,10 +103,9 @@ class Recipe(object):
                         os.chdir(entries[0])
                     else:
                         raise ValueError("Couldn't find Makefile")
-                else:
-                    optionstring = ' '.join(
+                optionstring = ' '.join(
                         ['='.join(x) for x in buildoptions.items() if x[1]])
-                    system("%s %s %s" % (make, optionstring, extra_options))
+                system("%s %s %s" % (make, optionstring, extra_options))
                 system("%s PREFIX=%s install" % (make, dest))
             finally:
                 os.chdir(here)
