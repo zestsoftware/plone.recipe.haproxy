@@ -1,10 +1,15 @@
 Releases
 =========
 
-1.1.2 (unreleased)
+1.1.2 (2012-01-26)
 ------------------
 
-- Force the use of gmake on freebsd. [lregebro]
+- Force the use of gmake on freebsd.
+  [lregebro]
+
+- When there the Makefile is in a deeper dir the make with options is never
+  executed
+  [kingel]
 
 1.1.1 (2010-10-06)
 ------------------
