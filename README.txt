@@ -57,4 +57,4 @@ https://bugs.launchpad.net/collective.buildout/
 Code repository
 ===============
 
-https://svn.plone.org/svn/collective/buildout/plone.recipe.haproxy
+https://github.com/plone/plone.recipe.haproxy
