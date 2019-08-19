@@ -5,8 +5,8 @@ import logging
 import os
 import shutil
 import tempfile
-import urllib2
-import urlparse
+import urllib.request, urllib.error, urllib.parse
+import urllib.parse
 
 try:
     from hashlib import sha1
@@ -30,7 +30,7 @@ class Recipe(object):
         self.download_cache = buildout['buildout'].get('download-cache')
         self.install_from_cache = buildout['buildout'].get(
             'install-from-cache')
-        if isinstance(self.install_from_cache, (str, unicode)):
+        if isinstance(self.install_from_cache, str):
             self.install_from_cache = self.install_from_cache.lower() == 'true'
 
         if self.download_cache:
@@ -104,7 +104,7 @@ class Recipe(object):
                     else:
                         raise ValueError("Couldn't find Makefile")
                 optionstring = ' '.join(
-                        ['='.join(x) for x in buildoptions.items() if x[1]])
+                        ['='.join(x) for x in list(buildoptions.items()) if x[1]])
                 system("%s %s %s" % (make, optionstring, extra_options))
                 system("%s PREFIX=%s install" % (make, dest))
             finally:
@@ -124,10 +124,10 @@ class Recipe(object):
                 logger.info("Adding script wrapper for %s" % filename)
                 target=os.path.join(bintarget, filename)
                 f=open(target, "wt")
-                print >>f, "#!/bin/sh"
-                print >>f, 'exec %s "$@"' % os.path.join(fullpath, filename)
+                print("#!/bin/sh", file=f)
+                print('exec %s "$@"' % os.path.join(fullpath, filename), file=f)
                 f.close()
-                os.chmod(target, 0755)
+                os.chmod(target, 0o755)
                 self.options.created(target)
 
         return dest
@@ -139,12 +139,12 @@ class Recipe(object):
 
 def getFromCache(url, name, download_cache=None, install_from_cache=False):
     if download_cache:
-        cache_fname = sha1(url).hexdigest()
+        cache_fname = sha1(url.encode('utf-8')).hexdigest()
         cache_name = os.path.join(download_cache, cache_fname)
         if not os.path.isdir(download_cache):
             os.mkdir(download_cache)
 
-    _, _, urlpath, _, _ = urlparse.urlsplit(url)
+    _, _, urlpath, _, _ = urllib.parse.urlsplit(url)
     filename = urlpath.split('/')[-1]
 
     # get the file from the right place
@@ -182,9 +182,9 @@ def getFromCache(url, name, download_cache=None, install_from_cache=False):
                     now = datetime.datetime.utcnow()
                     cache_ini = os.path.join(cache_name, "cache.ini")
                     cache_ini = open(cache_ini, "w")
-                    print >>cache_ini, "[cache]"
-                    print >>cache_ini, "download_url =", url
-                    print >>cache_ini, "retrieved =", now.isoformat() + "Z"
+                    print("[cache]", file=cache_ini)
+                    print("download_url =", url, file=cache_ini)
+                    print("retrieved =", now.isoformat() + "Z", file=cache_ini)
                     cache_ini.close()
                 logging.getLogger(name).debug(
                     'Cache download %s as %s' % (url, cache_name))
@@ -193,7 +193,7 @@ def getFromCache(url, name, download_cache=None, install_from_cache=False):
                 tmp2 = tempfile.mkdtemp('buildout-' + name)
                 fname = os.path.join(tmp2, filename)
                 logging.getLogger(name).info('Downloading %s' % url)
-            open(fname, 'w').write(urllib2.urlopen(url).read())
+            open(fname, 'w').write(urllib.request.urlopen(url).read())
         except:
             if tmp2 is not None:
                 shutil.rmtree(tmp2)

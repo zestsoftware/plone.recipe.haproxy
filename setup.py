@@ -11,6 +11,7 @@ setup(
         open('CONTRIBUTORS.txt').read() + '\n' +
         open('CHANGES.txt').read()),
     classifiers=[
+        'Python :: 3',
         'Framework :: Buildout',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
