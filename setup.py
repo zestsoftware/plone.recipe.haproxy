@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
-version = '1.1.2'
+version = '2.0.0.dev0'
 
 setup(
     name='plone.recipe.haproxy',
     version=version,
     description="Buildout recipe to install haproxy",
     long_description=(
-        open('README.txt').read() + '\n' +
+        open('README.rst').read() + '\n' +
         open('CONTRIBUTORS.txt').read() + '\n' +
         open('CHANGES.txt').read()),
     classifiers=[
